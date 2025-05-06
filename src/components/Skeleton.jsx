@@ -4,7 +4,7 @@ const Skeleton = () => {
   return Array.from({ length: 9 }).map((_, index) => (
     <div
       key={index}
-      className="flex items-center py-4 border-b border-[#1e2322] animate-pulse"
+      className="flex items-center px-10 py-4 border-b border-[#1e2322] animate-pulse"
     >
       <div className="w-8 h-8 rounded-full bg-[#1e2322] mr-3" />
       <div className="flex-1 space-y-1">

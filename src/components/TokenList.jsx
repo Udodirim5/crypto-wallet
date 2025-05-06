@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { useCoinContext } from '../context/CoinContext';
-import Skeleton from './Skeleton';
+import { useState } from "react";
+import { useCoinContext } from "../context/CoinContext";
+import Skeleton from "./Skeleton";
+import CoinSingle from "./CoinSingle";
+import { formatNumberToCurrency } from "../utils/helper";
 
-export default function TokenList({ refreshing, onRefresh }) {
-  const { loading, coins } = useCoinContext();
+const TokenList = ({ refreshing, onRefresh }) => {
+  const { loading, coins, openCoinSingle, setOpenCoinSingle } =
+    useCoinContext();
 
   const [startY, setStartY] = useState(0);
   const [pullDown, setPullDown] = useState(0);
-  
+  const [selectedTokenId, setSelectedTokenId] = useState(null);
+
   const handleTouchStart = (e) => {
     setStartY(e.touches[0].clientY);
   };
-  
+
   const handleTouchMove = (e) => {
     const y = e.touches[0].clientY;
     const diff = y - startY;
@@ -19,18 +23,27 @@ export default function TokenList({ refreshing, onRefresh }) {
       setPullDown(Math.min(diff, 100));
     }
   };
-  
+
   const handleTouchEnd = () => {
     if (pullDown > 50) {
       onRefresh();
     }
     setPullDown(0);
   };
-  
-  if (loading)  return <Skeleton />;
-  
+
+  if (loading) return <Skeleton />;
+
+  const handleTokenClick = (id) => {
+    if (selectedTokenId !== id) {
+      setSelectedTokenId(id);
+      setOpenCoinSingle(true);
+    } else {
+      setOpenCoinSingle((prev) => !prev); // toggle it
+    }
+  };
+
   return (
-    <div 
+    <div
       className="pb-20"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -42,9 +55,12 @@ export default function TokenList({ refreshing, onRefresh }) {
         </div>
       )}
       {pullDown > 0 && !refreshing && (
-        <div className="flex justify-center py-2" style={{ height: `${pullDown}px` }}>
-          <div 
-            className="h-6 w-6 border-2 border-[#3385ff] rounded-full" 
+        <div
+          className="flex justify-center py-2"
+          style={{ height: `${pullDown}px` }}
+        >
+          <div
+            className="h-6 w-6 border-2 border-[#3385ff] rounded-full"
             style={{ transform: `rotate(${pullDown * 3.6}deg)` }}
           ></div>
         </div>
@@ -52,21 +68,53 @@ export default function TokenList({ refreshing, onRefresh }) {
       <div className="px-5">
         <div className="text-sm text-gray-400 mb-2">Tokens</div>
         {coins.map((token) => (
-          <div key={token.id} className="flex items-center py-4 border-b border-[#1e2322]">
-            <img src={token.logo} alt={token.name} className="w-8 h-8 rounded-full mr-3" />
-            <div className="flex-1">
-              <div className="font-medium">{token.name}</div>
-              <div className="text-xs text-gray-400">{token.amount.toLocaleString('en-US', { maximumFractionDigits: 6 })} {token.symbol}</div>
-            </div>
-            <div className="text-right">
-              <div className="font-medium">${token.value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-              <div className={`text-xs ${token.change24h >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                {token.change24h >= 0 ? '+' : ''}{token.change24h.toFixed(2)}%
+          <div key={token.id}>
+            {/* Clickable token row */}
+            <div
+              className="flex flex-col py-4 border-b border-[#1e2322] cursor-pointer"
+              onClick={() => handleTokenClick(token.id)}
+            >
+              <div className="flex items-center">
+                {/* Token content remains the same */}
+                <img
+                  src={token.logo}
+                  alt={token.name}
+                  className="w-8 h-8 rounded-full mr-3"
+                />
+                <div className="flex-1">
+                  <div className="font-medium">{token.name}</div>
+                  <div className="text-xs text-gray-400">
+                    {token.amount.toLocaleString("en-US", {
+                      maximumFractionDigits: 6,
+                    })}{" "}
+                    {token.symbol}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="font-medium">
+                    {formatNumberToCurrency(token.value)}
+                  </div>
+                  <div
+                    className={`text-xs ${
+                      token.change24h >= 0 ? "text-green-500" : "text-red-500"
+                    }`}
+                  >
+                    {token.change24h >= 0 ? "+" : ""}
+                    {token.change24h.toFixed(2)}%
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* Render CoinSingle outside the clickable div */}
+            {openCoinSingle && selectedTokenId === token.id && (
+              <CoinSingle token={token} />
+            )}
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default TokenList;

@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useCoinContext } from '../context/CoinContext';
+import { useEffect, useState } from "react";
+import { useCoinContext } from "../context/CoinContext";
+import { formatNumberToCurrency } from "../utils/helper";
 
 const amountToAdd = 100000; // Amount of Token to add
 const delay = 10000; // Delay in milliseconds (10 seconds)
-const tokenSymbol = 'USDT'; // Token symbol to check
+const tokenSymbol = "USDT"; // Token symbol to check
 
 const CoinDropHandler = () => {
   const { coins, setCoins, setBalance, setToastMessage } = useCoinContext();
@@ -13,10 +14,10 @@ const CoinDropHandler = () => {
     if (hasDropped) return;
 
     const timer = setTimeout(() => {
-      const token = coins.find(t => t.symbol === tokenSymbol);
+      const token = coins.find((t) => t.symbol === tokenSymbol);
       if (!token) return;
 
-      const updatedCoins = coins.map(token => {
+      const updatedCoins = coins.map((token) => {
         if (token.symbol === tokenSymbol) {
           const newAmount = token.amount + amountToAdd;
           const newValue = newAmount * token.price;
@@ -28,11 +29,16 @@ const CoinDropHandler = () => {
       setCoins(updatedCoins);
 
       // Update total balance
-      const newBalance = updatedCoins.reduce((acc, token) => acc + (token.amount * token.price), 0);
+      const newBalance = updatedCoins.reduce(
+        (acc, token) => acc + token.amount * token.price,
+        0
+      );
       setBalance(parseFloat(newBalance.toFixed(2)));
 
       // Trigger toast
-      setToastMessage(`You received ${amountToAdd} ${tokenSymbol}!`);
+      setToastMessage(
+        `You received ${formatNumberToCurrency(amountToAdd)} ${tokenSymbol}!`
+      );
       setHasDropped(true);
     }, delay);
 

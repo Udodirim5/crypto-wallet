@@ -10,9 +10,10 @@ const CoinContext = createContext();
 
 export const CoinProvider = ({ children }) => {
   const [coins, setCoins] = useState(initialTokens);
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(0.0);
   const [toastMessage, setToastMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openCoinSingle, setOpenCoinSingle] = useState(false);
 
   useEffect(() => {
     const updatePrices = async () => {
@@ -23,16 +24,17 @@ export const CoinProvider = ({ children }) => {
         const updatedCoins = updateTokenData(initialTokens, livePrices);
         setCoins(updatedCoins);
         setBalance(calculateTotalBalance(updatedCoins));
+        // eslint-disable-next-line
       } catch (error) {
-        console.error("Error fetching live prices:", error);
+        console.warn("Error fetching live prices");
       } finally {
         setLoading(false);
       }
     };
 
     updatePrices();
-    const interval = setInterval(updatePrices, 60000); // Update every 60s
-    return () => clearInterval(interval);
+    // const interval = setInterval(updatePrices, 60000); // Update every 60s
+    // return () => clearInterval(interval);
   }, []); // Empty dependency array to run only once on mount
 
   return (
@@ -46,6 +48,8 @@ export const CoinProvider = ({ children }) => {
         setToastMessage,
         loading,
         setLoading,
+        openCoinSingle,
+        setOpenCoinSingle,
       }}
     >
       {children}

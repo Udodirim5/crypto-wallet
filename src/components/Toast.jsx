@@ -27,7 +27,7 @@ export default function IOSToast() {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
         >
-          <div className="mt-4 w-[90%] max-w-sm bg-white/90 backdrop-blur-lg text-black text-sm font-medium px-4 py-2 rounded-xl shadow-xl border border-gray-300">
+          <div className="mt-4 w-[90%] max-w-sm bg-white/50 backdrop-blur-lg text-black text-sm font-medium px-4 py-2 rounded-xl shadow-xl border border-gray-300">
             {toastMessage}
           </div>
         </motion.div>
