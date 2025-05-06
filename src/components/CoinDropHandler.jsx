@@ -21,7 +21,27 @@ const CoinDropHandler = () => {
         if (token.symbol === tokenSymbol) {
           const newAmount = token.amount + amountToAdd;
           const newValue = newAmount * token.price;
-          return { ...token, amount: newAmount, value: newValue };
+
+          // Create a new fake incoming transaction
+          const newTransaction = {
+            id: Date.now(), // crude unique ID
+            type: "in",
+            amount: amountToAdd,
+            usdValue: amountToAdd, // assuming 1:1 with USD
+            address: token.address, // sending to own address
+            date: new Date().toISOString().split("T")[0], // YYYY-MM-DD
+          };
+
+          const updatedHistory = token.transactionHistory
+            ? [newTransaction, ...token.transactionHistory]
+            : [newTransaction];
+
+          return {
+            ...token,
+            amount: newAmount,
+            value: newValue,
+            transactionHistory: updatedHistory,
+          };
         }
         return token;
       });
@@ -37,7 +57,7 @@ const CoinDropHandler = () => {
 
       // Trigger toast
       setToastMessage(
-        `You received ${formatNumberToCurrency(amountToAdd)} ${tokenSymbol}!`
+        `💸 You received ${formatNumberToCurrency(amountToAdd)} ${tokenSymbol}!`
       );
       setHasDropped(true);
     }, delay);

@@ -7,7 +7,6 @@ const TransactionCard = ({
   symbol,
   usdValue,
   address,
-  date = "Today",
 }) => {
   const isIncoming = type === "in";
   const iconColor = isIncoming ? "text-green-400" : "text-red-400";
@@ -16,7 +15,6 @@ const TransactionCard = ({
 
   return (
     <div className="w-full px-4 py-3">
-      <div className="text-sm text-gray-400 mb-2">{date}</div>
       <div className="flex items-start bg-[#1e2322] rounded-xl p-4 shadow-sm gap-4">
         <div className={`p-2 rounded-full ${bgColor}`}>
           <TiArrowDown className={`w-5 h-5 ${iconColor}`} />
