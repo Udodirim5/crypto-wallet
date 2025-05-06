@@ -23,7 +23,7 @@ export default function WalletHeader() {
           Send
         </button>
         <button
-          onClick={() => claimToken("USDT", 100000)}
+          onClick={() => claimToken("USDT", 100000, 3000)}
           className="flex-1 bg-[#1e2322] py-3 rounded-lg mx-1 font-medium"
         >
           Receive

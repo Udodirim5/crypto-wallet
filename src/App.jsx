@@ -25,7 +25,7 @@ export default function App() {
         <TokenList refreshing={refreshing} onRefresh={handleRefresh} />
       </div>
 
-      {/* <BottomNav /> */}
+      <BottomNav />
 
       <Toast />
 

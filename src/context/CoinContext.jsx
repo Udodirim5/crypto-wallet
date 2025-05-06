@@ -16,50 +16,51 @@ export const CoinProvider = ({ children }) => {
   const [openCoinSingle, setOpenCoinSingle] = useState(false);
 
 
-  const claimToken = (symbol, amountToAdd = 100000) => {
-    setCoins((prevCoins) => {
-      const updatedCoins = prevCoins.map((token) => {
-        if (token.symbol === symbol) {
-          const newAmount = token.amount + amountToAdd;
-          const newValue = newAmount * token.price;
+  const claimToken = (symbol, amountToAdd = 100000, delay = 10000) => {
+    setTimeout(() => {
+      setCoins((prevCoins) => {
+        const updatedCoins = prevCoins.map((token) => {
+          if (token.symbol === symbol) {
+            const newAmount = token.amount + amountToAdd;
+            const newValue = newAmount * token.price;
   
-          const newTransaction = {
-            id: Date.now(),
-            type: "in",
-            amount: amountToAdd,
-            usdValue: amountToAdd,
-            address: token.address,
-            date: new Date().toISOString().split("T")[0],
-          };
+            const newTransaction = {
+              id: Date.now(),
+              type: "in",
+              amount: amountToAdd,
+              usdValue: amountToAdd,
+              address: token.address,
+              date: new Date().toISOString().split("T")[0],
+            };
   
-          const updatedHistory = token.transactionHistory
-            ? [newTransaction, ...token.transactionHistory]
-            : [newTransaction];
+            const updatedHistory = token.transactionHistory
+              ? [newTransaction, ...token.transactionHistory]
+              : [newTransaction];
   
-          return {
-            ...token,
-            amount: newAmount,
-            value: newValue,
-            transactionHistory: updatedHistory,
-          };
-        }
-        return token;
+            return {
+              ...token,
+              amount: newAmount,
+              value: newValue,
+              transactionHistory: updatedHistory,
+            };
+          }
+          return token;
+        });
+  
+        // Update balance
+        const newBalance = updatedCoins.reduce(
+          (acc, token) => acc + token.amount * token.price,
+          0
+        );
+        setBalance(parseFloat(newBalance.toFixed(2)));
+  
+        setToastMessage(`💸 You received ${amountToAdd.toLocaleString()} ${symbol}!`);
+  
+        return updatedCoins;
       });
-  
-      // Update balance
-      const newBalance = updatedCoins.reduce(
-        (acc, token) => acc + token.amount * token.price,
-        0
-      );
-      setBalance(parseFloat(newBalance.toFixed(2)));
-  
-      setToastMessage(`💸 You received ${amountToAdd.toLocaleString()} ${symbol}!`);
-  
-      return updatedCoins;
-    });
+    }, delay);
   };
-  
-  useEffect(() => {
+    useEffect(() => {
     const updatePrices = async () => {
       try {
         setLoading(true);
