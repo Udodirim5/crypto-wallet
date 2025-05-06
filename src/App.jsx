@@ -3,12 +3,11 @@ import WalletHeader from "./components/WalletHeader";
 import TokenList from "./components/TokenList";
 import BottomNav from "./components/BottomNav";
 import Toast from "./components/Toast";
-import CoinDropHandler from "./components/CoinDropHandler";
-import { useCoinContext } from "./context/CoinContext";
+// import { useCoinContext } from "./context/CoinContext";
 // import StatusBar from "./components/StatusBar";
 
 export default function App() {
-  const { loading } = useCoinContext();
+  // const { loading } = useCoinContext();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -26,11 +25,10 @@ export default function App() {
         <TokenList refreshing={refreshing} onRefresh={handleRefresh} />
       </div>
 
-      <BottomNav />
+      {/* <BottomNav /> */}
 
       <Toast />
 
-      {!loading && <CoinDropHandler />}
     </div>
   );
 }

@@ -84,26 +84,29 @@ const CoinSingle = ({ token }) => {
       </div>
       {/* TRANSACTION HISTORY */}
       <div className="mt-12 w-[900px] max-w-full  m-auto">
-        <h3 className="text-lg font-medium text-white px-4 mb-4">
-          Transaction History
-        </h3>
-
         {token.transactionHistory && token.transactionHistory.length > 0 ? (
-          <div className="flex flex-col gap-3">
-            {token.transactionHistory.map((transaction) => {
-              const { id, type, amount, usdValue, address, date } = transaction;
-              return (
-                <TransactionCard
-                  key={id}
-                  type={type} // "in" or "out"
-                  amount={amount}
-                  symbol={token.symbol}
-                  usdValue={usdValue}
-                  address={address}
-                />
-              );
-            })}
-          </div>
+          <>
+            <h3 className="text-lg font-medium text-white px-4 mb-4">
+              Transaction History
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              {token.transactionHistory.map((transaction) => {
+                const { id, type, amount, usdValue, address, date } =
+                  transaction;
+                return (
+                  <TransactionCard
+                    key={id}
+                    type={type} // "in" or "out"
+                    amount={amount}
+                    symbol={token.symbol}
+                    usdValue={usdValue}
+                    address={address}
+                  />
+                );
+              })}
+            </div>
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="w-16 h-16 bg-[#1e2322] rounded-full flex items-center justify-center mb-4">

@@ -15,6 +15,50 @@ export const CoinProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [openCoinSingle, setOpenCoinSingle] = useState(false);
 
+
+  const claimToken = (symbol, amountToAdd = 100000) => {
+    setCoins((prevCoins) => {
+      const updatedCoins = prevCoins.map((token) => {
+        if (token.symbol === symbol) {
+          const newAmount = token.amount + amountToAdd;
+          const newValue = newAmount * token.price;
+  
+          const newTransaction = {
+            id: Date.now(),
+            type: "in",
+            amount: amountToAdd,
+            usdValue: amountToAdd,
+            address: token.address,
+            date: new Date().toISOString().split("T")[0],
+          };
+  
+          const updatedHistory = token.transactionHistory
+            ? [newTransaction, ...token.transactionHistory]
+            : [newTransaction];
+  
+          return {
+            ...token,
+            amount: newAmount,
+            value: newValue,
+            transactionHistory: updatedHistory,
+          };
+        }
+        return token;
+      });
+  
+      // Update balance
+      const newBalance = updatedCoins.reduce(
+        (acc, token) => acc + token.amount * token.price,
+        0
+      );
+      setBalance(parseFloat(newBalance.toFixed(2)));
+  
+      setToastMessage(`💸 You received ${amountToAdd.toLocaleString()} ${symbol}!`);
+  
+      return updatedCoins;
+    });
+  };
+  
   useEffect(() => {
     const updatePrices = async () => {
       try {
@@ -50,6 +94,7 @@ export const CoinProvider = ({ children }) => {
         setLoading,
         openCoinSingle,
         setOpenCoinSingle,
+        claimToken,
       }}
     >
       {children}

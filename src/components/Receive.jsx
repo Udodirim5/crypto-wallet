@@ -7,6 +7,7 @@ import {
 import Button from "./Button";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { TiArrowDown } from "react-icons/ti";
+import DotSpinner from "./DotSpinner";
 
 const Receive = ({ setShowReceive, token }) => {
   const copyAddress = () => {
@@ -69,7 +70,9 @@ const Receive = ({ setShowReceive, token }) => {
               <div className="text-gray-700 font-medium mb-2">QR CODE</div>
               <div className="w-full h-32 bg-gray-100 flex items-center justify-center mb-2">
                 {/* QR Code would go here */}
-                <div className="text-xs text-gray-500">[QR Code]</div>
+                <div className="text-xs text-gray-500">
+                  <DotSpinner />
+                </div>
               </div>
               <p className="text-xs text-gray-500 break-all px-2">
                 {token.address}
