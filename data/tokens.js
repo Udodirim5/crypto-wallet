@@ -68,6 +68,7 @@ export const initialTokens = [
     change24h: 0.0,
     logo: "/images/usdt.png",
     address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    networkLogo: "/images/trx.png",
     transactionHistory: [
       {
         id: 1,

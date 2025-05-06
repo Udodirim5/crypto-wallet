@@ -1,5 +1,6 @@
 import { FaCheckCircle } from "react-icons/fa";
 import { TiArrowDown } from "react-icons/ti";
+import { formatNumberToCurrency } from "../utils/helper";
 
 const TransactionCard = ({
   type = "in",
@@ -35,7 +36,7 @@ const TransactionCard = ({
             {amountPrefix}
             {parseFloat(amount).toFixed(6)} {symbol}
           </div>
-          <div className="text-xs text-gray-400">≈ ${usdValue}</div>
+          <div className="text-xs text-gray-400">≈ {formatNumberToCurrency(usdValue)}</div>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const CoinSingle = ({ token }) => {
 
   return (
     <div
-      className="fixed top-0 bottom-0 left-0 right-0 bg-[#0c0f0e] border-t border-[#1e2322] pb-4 pt-2 px-4 z-50 overflow-y-auto"
+      className="fixed top-0 bottom-0 left-0 right-0 w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 pt-2 px-4 z-50 overflow-y-auto"
       onClick={(e) => e.stopPropagation()}
     >
       {/* HEADER */}
@@ -56,11 +56,18 @@ const CoinSingle = ({ token }) => {
       {/* COIN CONTENT */}
       <div className="flex flex-col gap-8 justify-center items-center mt-8 px-2">
         <div className="flex flex-col items-center mb-4">
-          <img
-            src={token.logo}
-            alt={token.name}
-            className="h-20 w-20 rounded-full mb-4"
-          />
+          <div className="relative">
+            <img
+              src={token.logo}
+              alt={token.name}
+              className="h-20 w-20 rounded-full mb-4"
+            />
+            {token.networkLogo && <img
+              src={token.networkLogo}
+              alt={token.name}
+              className="absolute h-4 w-4 rounded-full bottom-4 right-2"
+            />}
+          </div>
           <h1 className="text-2xl font-medium">
             {formatNumberToDecimal(token.amount, 0)} {token.symbol}
           </h1>
@@ -92,8 +99,7 @@ const CoinSingle = ({ token }) => {
 
             <div className="flex flex-col gap-3">
               {token.transactionHistory.map((transaction) => {
-                const { id, type, amount, usdValue, address, date } =
-                  transaction;
+                const { id, type, amount, usdValue, address } = transaction;
                 return (
                   <TransactionCard
                     key={id}

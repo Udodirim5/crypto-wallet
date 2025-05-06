@@ -66,7 +66,10 @@ const TokenList = ({ refreshing, onRefresh }) => {
         </div>
       )}
       <div className="px-5">
-        <div className="text-sm text-gray-400 mb-2">Tokens</div>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <button className="text-gray-300 border-b-2 border-green-500 font-bold py-1.5">Crypto</button>
+          <button className="text-gray-300/60 font-medium py-1.5">NFTs</button>
+        </div>
         {coins.map((token) => (
           <div key={token.id}>
             {/* Clickable token row */}
