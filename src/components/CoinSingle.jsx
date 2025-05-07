@@ -42,7 +42,7 @@ const CoinSingle = ({ token }) => {
 
   return (
     <div
-      className="fixed top-0 bottom-0 left-0 right-0 h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 px-4 z-50 overflow-y-auto"
+      className="fixed top-0 bottom-0 left-0 right-0 h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 sm:px-4 z-50 overflow-y-auto"
       onClick={(e) => e.stopPropagation()}
     >
       {/* HEADER */}
@@ -109,7 +109,7 @@ const CoinSingle = ({ token }) => {
         </div>
       </div>
       {/* TRANSACTION HISTORY */}
-      <div className="mt-12 w-full max-w-[900px] m-auto px-2 sm:px-4">
+      <div className="mt-12 w-full max-w-[900px] m-auto sm:px-4">
       {token.transactionHistory && token.transactionHistory.length > 0 ? (
           <>
             <h3 className="text-lg font-medium text-white px-4 mb-4">

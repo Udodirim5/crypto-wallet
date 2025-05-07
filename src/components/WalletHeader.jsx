@@ -25,7 +25,7 @@ export default function WalletHeader() {
           <Button icon={<MdFilterCenterFocus className="text-xs sm:text-base" />} onClick={() => {}} />
           <Button icon={<PiCopySimpleThin className="text-xs sm:text-base" />} onClick={() => {}} />
           {/* Hide search & options on mobile to reduce clutter */}
-          <div className="hidden sm:block">
+          <div className="hidden sm:flex ">
             <Button icon={<IoSearch className="text-base" />} onClick={() => {}} />
             <Button icon={<FaEllipsisH className="text-base" />} onClick={() => {}} />
           </div>
