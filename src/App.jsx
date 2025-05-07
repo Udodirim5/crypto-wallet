@@ -14,8 +14,8 @@ export default function App() {
   };
 
   return (
-<div className="flex flex-col h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] text-white px-10">
-{/* <StatusBar /> */}
+    <div className="flex flex-col h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] text-white sm:px-10">
+      {/* <StatusBar /> */}
 
       <div className="flex-1 overflow-y-auto">
         <WalletHeader />

@@ -1,6 +1,6 @@
 // tokens.js
 
-const baseName = "crypto-wallet/";
+const baseName = `${import.meta.env.BASE_URL}/`;
 
 export const initialTokens = [
   {
