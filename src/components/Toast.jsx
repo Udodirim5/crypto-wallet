@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// eslint-disable-next-line
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCoinContext } from '../context/CoinContext';
 

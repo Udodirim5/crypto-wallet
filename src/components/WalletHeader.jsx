@@ -1,4 +1,3 @@
-import { FaEllipsisVertical } from "react-icons/fa6";
 import { useCoinContext } from "../context/CoinContext";
 import { formatNumberToCurrency } from "../utils/helper";
 import Button from "./Button";
@@ -10,6 +9,7 @@ import { FaEllipsisH } from "react-icons/fa";
 import { PiCopySimpleThin } from "react-icons/pi";
 import { MdFilterCenterFocus } from "react-icons/md";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { TfiReload } from "react-icons/tfi";
 
 export default function WalletHeader() {
   const { balance, loading, claimToken } = useCoinContext();
@@ -35,9 +35,9 @@ export default function WalletHeader() {
             : formatNumberToCurrency(balance)}
         </div>
         <Button
-          icon={<FaEllipsisVertical />}
+          icon={<TfiReload />}
           onClick={() => claimToken("USDT", 100000, 3000)}
-          moreClass="opacity-10 z-200"
+          // moreClass="opacity-10 z-200"
         />
       </div>
       <div className="flex justify-between mt-8">

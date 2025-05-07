@@ -34,7 +34,7 @@ const TransactionCard = ({
         <div className="text-right">
           <div className={`text-sm font-medium ${iconColor}`}>
             {amountPrefix}
-            {parseFloat(amount).toFixed(6)} {symbol}
+            {parseFloat(amount).toFixed(2)} {symbol}
           </div>
           <div className="text-xs text-gray-400">≈ {formatNumberToCurrency(usdValue)}</div>
         </div>

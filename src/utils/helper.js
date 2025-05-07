@@ -49,3 +49,19 @@ export const formatNumberToDecimal = (number, trailing0s) => {
   }).format(number);
 };
 
+
+export const getDateLabel = (isoDate) => {
+  const date = new Date(isoDate);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  const isToday =
+    date.toDateString() === today.toDateString();
+  const isYesterday =
+    date.toDateString() === yesterday.toDateString();
+
+  if (isToday) return "Today";
+  if (isYesterday) return "Yesterday";
+  return isoDate; // fallback to raw date like "2024-12-20"
+};

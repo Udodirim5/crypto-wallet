@@ -67,7 +67,9 @@ const TokenList = ({ refreshing, onRefresh }) => {
       )}
       <div className="px-5">
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <button className="text-gray-300 border-b-2 border-green-500 font-bold py-1.5">Crypto</button>
+          <button className="text-gray-300 border-b-2 border-green-500 font-bold py-1.5">
+            Crypto
+          </button>
           <button className="text-gray-300/60 font-medium py-1.5">NFTs</button>
         </div>
         {coins.map((token) => (
@@ -79,11 +81,22 @@ const TokenList = ({ refreshing, onRefresh }) => {
             >
               <div className="flex items-center">
                 {/* Token content remains the same */}
-                <img
-                  src={token.logo}
-                  alt={token.name}
-                  className="w-8 h-8 rounded-full mr-3"
-                />
+
+                <div className="relative">
+                  <img
+                    src={token.logo}
+                    alt={token.name}
+                    className="w-8 h-8 rounded-full mr-3"
+                  />
+                  {token.networkLogo && (
+                    <img
+                      src={token.networkLogo}
+                      alt={token.name}
+                      className="absolute h-4 w-4 rounded-full bottom-1 right-2"
+                    />
+                  )}
+                </div>
+
                 <div className="flex-1">
                   <div className="font-medium">{token.name}</div>
                   <div className="text-xs text-gray-400">
