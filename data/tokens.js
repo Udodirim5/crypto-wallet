@@ -1,4 +1,7 @@
 // tokens.js
+
+const baseName = "crypto-wallet/";
+
 export const initialTokens = [
   {
     id: "bitcoin",
@@ -8,7 +11,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/btc.png",
+    logo: `${baseName}images/btc.png`,
     address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh", // real BTC format
     transactionHistory: [
       {
@@ -37,7 +40,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/eth.png",
+    logo: `${baseName}images/eth.png`,
     address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
     transactionHistory: [
       {
@@ -66,9 +69,9 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/usdt.png",
+    logo: `${baseName}images/usdt.png`,
     address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-    networkLogo: "/images/trx.png",
+    networkLogo: `${baseName}images/trx.png`,
     transactionHistory: [
       {
         id: 1,
@@ -96,7 +99,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/ada.png",
+    logo: `${baseName}images/ada.png`,
     address: "addr1q92u9l8pgu84ydue0ey0w95vsq8rt95k9a8djw4klf76ulzldvv5mrft2f6zunptz8zctgtwq87acpff7w32xgyc4edq74c8xm",
   },
   {
@@ -107,7 +110,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/doge.png",
+    logo: `${baseName}images/doge.png`,
     address: "D5vHwUdRa4K1hcnK3F2RLDeXuup6MH2bEZ",
   },
   {
@@ -118,7 +121,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/ltc.png",
+    logo: `${baseName}images/ltc.png`,
     address: "ltc1qv93xh4uv2fknt2y3wse7sz2fnz5w39zdc3kczg",
   },
   {
@@ -129,7 +132,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/bnb.png",
+    logo: `${baseName}images/bnb.png`,
     address: "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
   },
   {
@@ -140,7 +143,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/sol.png",
+    logo: `${baseName}images/sol.png`,
     address: "2mXJb6Xs2owHwC5XcEwuz6Eq4gkAfAnYPqgUmd2xZ8vM",
     transactionHistory: [
       {
@@ -169,7 +172,7 @@ export const initialTokens = [
     value: 0.0,
     price: 0.0,
     change24h: 0.0,
-    logo: "/images/xrp.png",
+    logo: `${baseName}images/xrp.png`,
     address: "rDsbeomae4FXwgQTJp9Rs64Qg9vDiTCdBv",
   },
 ];

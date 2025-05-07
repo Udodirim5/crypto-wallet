@@ -28,7 +28,7 @@ export default function WalletHeader() {
           <Button icon={<FaEllipsisH />} onClick={() => {}} />
         </div>
       </div>
-      <div className="flex items-center justify-between mt-2">
+      <div className="flex items-center  mt-2">
         <div className="text-3xl font-semibold">
           {loading
             ? formatNumberToCurrency(0)

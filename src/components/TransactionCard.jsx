@@ -1,6 +1,6 @@
 import { FaCheckCircle } from "react-icons/fa";
 import { TiArrowDown } from "react-icons/ti";
-import { formatNumberToCurrency } from "../utils/helper";
+import { formatNumberToCurrency, truncateAddress } from "../utils/helper";
 
 const TransactionCard = ({
   type = "in",
@@ -27,8 +27,9 @@ const TransactionCard = ({
               <FaCheckCircle className="w-4 h-4 inline-block rounded-full bg-green-400" />
             </span>
           </div>
-          <div className="text-sm text-gray-400 mt-0.5">
-            {isIncoming ? "From" : "To"}: {address}
+          <div className="flex gap-2 text-sm text-gray-400 mt-0.5">
+            {isIncoming ? "From" : "To"}: 
+            <span className="block truncate max-w-full">{truncateAddress(address)}</span> {/* Truncate the address */}
           </div>
         </div>
         <div className="text-right">

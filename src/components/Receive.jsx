@@ -22,7 +22,7 @@ const Receive = ({ setShowReceive, token }) => {
 
   return (
     <div
-      className="fixed inset-0 w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 pt-2 px-4 z-101 overflow-y-auto"
+      className="fixed inset-0 h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 pt-2 px-4 z-101 overflow-y-auto"
       onClick={(e) => e.stopPropagation()}
     >
       {/* HEADER */}

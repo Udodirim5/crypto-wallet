@@ -42,7 +42,7 @@ const CoinSingle = ({ token }) => {
 
   return (
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 pt-2 px-4 z-50 overflow-y-auto"
+        className="fixed top-0 bottom-0 left-0 right-0 h-screen w-full max-w-[700px] m-auto bg-[#0c0f0e] border-t border-[#1e2322] pb-4 px-4 z-50 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* HEADER */}

@@ -65,3 +65,8 @@ export const getDateLabel = (isoDate) => {
   if (isYesterday) return "Yesterday";
   return isoDate; // fallback to raw date like "2024-12-20"
 };
+
+export function truncateAddress(address, startLength = 6, endLength = 4) {
+  if (!address || address.length <= startLength + endLength + 3) return address;
+  return `${address.slice(0, startLength)}...${address.slice(-endLength)}`;
+}
