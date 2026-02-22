@@ -1,0 +1,1 @@
+export const durationToWait = 7000; // 30 seconds

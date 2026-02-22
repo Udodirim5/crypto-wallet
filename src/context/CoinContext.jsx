@@ -15,12 +15,11 @@ export const CoinProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [openCoinSingle, setOpenCoinSingle] = useState(false);
 
-  const claimToken = (symbol, amountToAdd = 100000, delay = 10000) => {
+  const claimToken = (symbol, requestedAmount, delay = 10000) => {
+    const amountToAdd = parseFloat(requestedAmount);
 
-    // const requestedAmount = parseFloat(reqAmount);
-    // if (!isNaN(requestedAmount) && requestedAmount > 0) {
-    //   amountToAdd = requestedAmount;
-    // }
+    if (isNaN(amountToAdd) || amountToAdd <= 0) return;
+
     setTimeout(() => {
       setCoins((prevCoins) => {
         const updatedCoins = prevCoins.map((token) => {
@@ -32,40 +31,39 @@ export const CoinProvider = ({ children }) => {
               id: Date.now(),
               type: "in",
               amount: amountToAdd,
-              usdValue: amountToAdd,
+              usdValue: amountToAdd * token.price,
               address: token.address,
               date: new Date().toISOString().split("T")[0],
             };
-
-            const updatedHistory = token.transactionHistory
-              ? [newTransaction, ...token.transactionHistory]
-              : [newTransaction];
 
             return {
               ...token,
               amount: newAmount,
               value: newValue,
-              transactionHistory: updatedHistory,
+              transactionHistory: [
+                newTransaction,
+                ...(token.transactionHistory || []),
+              ],
             };
           }
           return token;
         });
 
-        // Update balance
         const newBalance = updatedCoins.reduce(
           (acc, token) => acc + token.amount * token.price,
-          0
+          0,
         );
-        setBalance(parseFloat(newBalance.toFixed(2)));
 
+        setBalance(Number(newBalance.toFixed(2)));
         setToastMessage(
-          `💸 You received ${amountToAdd.toLocaleString()} ${symbol}!`
+          `💸 You received ${amountToAdd.toLocaleString()} ${symbol}!`,
         );
 
         return updatedCoins;
       });
     }, delay);
   };
+
   useEffect(() => {
     const updatePrices = async () => {
       try {

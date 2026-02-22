@@ -10,6 +10,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import { TiArrowDown } from "react-icons/ti";
 import { QRCode } from "react-qrcode-logo";
 import { useCoinContext } from "../context/CoinContext";
+import { durationToWait } from "../../data/others";
 
 // SetAmountModal Component
 const SetAmountModal = ({ isOpen, onClose, token, address }) => {
@@ -96,7 +97,8 @@ const SetAmountModal = ({ isOpen, onClose, token, address }) => {
                 // Handle the set amount functionality
                 onClose();
                 copyAddress();
-                claimToken("USDT", reqAmount, 60000)
+                // claimToken("USDT", reqAmount, durationToWait)
+                claimToken(token.symbol, reqAmount, durationToWait)
               }}
               className="flex-1 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-colors"
             >
@@ -183,7 +185,7 @@ const Receive = ({ setShowReceive, token }) => {
               icon={<PiCopySimpleThin className="text-lg" />}
               label="Copy"
               onClick={copyAddress}
-              className="bg-[#1e2322] hover:bg-[#2a302e]"
+              className="bg-[#1e2322] hover:bg-[#a3a4a3]"
             />
             <Button
               icon={<PiHashFill className="text-lg" />}
